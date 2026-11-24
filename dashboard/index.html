@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Token Radar</title>
+  <link rel="stylesheet" href="app.css?v=20261124en2">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">TR</span><span>Token Radar</span></div>
+    <div class="snapshot-note" id="snapshot-note"></div>
+  </header>
+  <main>
+    <section class="intro">
+      <div class="intro-copy">
+        <p class="eyebrow">Pre-token protocol watchboard</p>
+        <h1>Track pre-token value at a glance</h1>
+        <p class="subcopy">A focused watchboard for TVL, momentum, and maturity.</p>
+      </div>
+      <div class="formula-box">
+        <span class="formula-label">Value model</span>
+        <strong>Implied value = TVL × Category multiplier × Growth momentum × Maturity × Multi-chain factor × Data completeness</strong>
+        <div class="parameter-grid" id="parameter-grid"></div>
+      </div>
+    </section>
+
+    <section class="metric-strip" id="metric-strip"></section>
+
+    <section class="workspace">
+      <div class="workspace-head">
+        <div>
+          <p class="eyebrow">Protocol index</p>
+          <h2 id="view-title">Pre-token ranking board</h2>
+        </div>
+        <div class="tabs" role="tablist" aria-label="Protocol views">
+          <button class="tab active" id="board-tab" data-view="board" role="tab" aria-controls="board-view" aria-selected="true">Ranking board <span id="board-count"></span></button>
+          <button class="tab" id="issued-tab" data-view="issued" role="tab" aria-controls="issued-view" aria-selected="false">Issued tokens <span id="issued-count"></span></button>
+        </div>
+      </div>
+
+      <div class="filters">
+        <label class="search-field"><span>Search protocols</span><input id="search-input" type="search" placeholder="Search name or slug" autocomplete="off"></label>
+        <label><span>Category</span><select id="category-filter"><option value="">All categories</option></select></label>
+        <label><span>Chain</span><select id="chain-filter"><option value="">All chains</option></select></label>
+        <button class="clear-button" id="clear-filters" type="button">Clear filters</button>
+      </div>
+
+      <div class="table-wrap" id="board-view">
+        <table>
+          <thead>
+            <tr>
+              <th><button class="sort-button" data-sort="rank" type="button">Rank <span aria-hidden="true">↕</span></button></th>
+              <th>Protocol</th><th>Category</th><th>Chains</th>
+              <th><button class="sort-button" data-sort="tvl_usd" type="button">TVL <span aria-hidden="true">↕</span></button></th>
+              <th><button class="sort-button" data-sort="change_7d" type="button">7d change <span aria-hidden="true">↕</span></button></th>
+              <th><button class="sort-button" data-sort="implied_value_usd" type="button">Implied value <span aria-hidden="true">↕</span></button></th>
+            </tr>
+          </thead>
+          <tbody id="board-body"></tbody>
+        </table>
+      </div>
+
+      <div class="table-wrap hidden" id="issued-view">
+        <table>
+          <thead>
+            <tr><th>Protocol</th><th>Category</th><th>Token</th><th><button class="sort-button" data-sort="mcap_usd" type="button">Market cap <span aria-hidden="true">↕</span></button></th></tr>
+          </thead>
+          <tbody id="issued-body"></tbody>
+        </table>
+      </div>
+      <div class="empty-state hidden" id="empty-state">No protocols match the current filters. Try clearing your filters.</div>
+    </section>
+
+    <div class="detail-overlay hidden" id="detail-panel" role="dialog" aria-modal="true" aria-labelledby="detail-title" aria-describedby="detail-subtitle" tabindex="-1">
+      <section class="detail-panel">
+        <div class="detail-head">
+          <div><p class="eyebrow">Protocol details</p><h2 id="detail-title"></h2><p id="detail-subtitle"></p></div>
+          <button class="close-button" id="close-detail" type="button" title="Close details" aria-label="Close details">×</button>
+        </div>
+        <div class="detail-grid">
+          <div class="field-list" id="detail-fields"></div>
+          <div class="farm-panel"><div class="farm-head"><span class="eyebrow">Farming plan</span><span class="step-count">6 steps</span></div><ol id="farm-steps"></ol></div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <footer><span>Token Radar · Snapshot <span id="footer-date"></span></span><span id="footer-source"></span></footer>
+  <script src="../data.js?v=20261124en2"></script>
+  <script src="app.js?v=20261124en2"></script>
+</body>
+</html>

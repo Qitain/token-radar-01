@@ -3,90 +3,50 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Token Radar</title>
-  <link rel="stylesheet" href="app.css?v=20261124en2">
+  <meta name="description" content="A sealed-snapshot token radar with blind-tested valuations, honest intervals and farm economics.">
+  <title>Token Radar · Evidence before conviction</title>
+  <link rel="stylesheet" href="app.css?v=20261125v2">
 </head>
 <body>
   <header class="topbar">
-    <div class="brand"><span class="brand-mark">TR</span><span>Token Radar</span></div>
+    <a class="brand" href="#top"><span class="brand-mark">TR</span><span>Token Radar <small>02</small></span></a>
+    <nav aria-label="Sections"><a href="#board">Board</a><a href="#validation">Evidence</a><a href="#planner">Planner</a><a href="#audit">Audit</a></nav>
     <div class="snapshot-note" id="snapshot-note"></div>
   </header>
-  <main>
+  <main id="top">
     <section class="intro">
-      <div class="intro-copy">
-        <p class="eyebrow">Pre-token protocol watchboard</p>
-        <h1>Track pre-token value at a glance</h1>
-        <p class="subcopy">A focused watchboard for TVL, momentum, and maturity.</p>
-      </div>
-      <div class="formula-box">
-        <span class="formula-label">Value model</span>
-        <strong>Implied value = TVL × Category multiplier × Growth momentum × Maturity × Multi-chain factor × Data completeness</strong>
-        <div class="parameter-grid" id="parameter-grid"></div>
-      </div>
+      <div><p class="eyebrow"><span class="live-dot"></span> Sealed snapshot · Independent research</p><h1>Evidence before<br> <em>conviction.</em></h1><p class="subcopy">Price a possible token. Test every assumption. Spend your farming budget where the conservative economics hold up.</p></div>
+      <div class="model-card"><span class="formula-label">The model earns its place</span><strong id="model-formula">Fitting the snapshot’s traded comparables…</strong><p id="model-summary"></p><a class="text-link" href="#validation">Inspect the blind tests <span aria-hidden="true">↗</span></a></div>
     </section>
-
-    <section class="metric-strip" id="metric-strip"></section>
-
-    <section class="workspace">
-      <div class="workspace-head">
-        <div>
-          <p class="eyebrow">Protocol index</p>
-          <h2 id="view-title">Pre-token ranking board</h2>
-        </div>
-        <div class="tabs" role="tablist" aria-label="Protocol views">
-          <button class="tab active" id="board-tab" data-view="board" role="tab" aria-controls="board-view" aria-selected="true">Ranking board <span id="board-count"></span></button>
-          <button class="tab" id="issued-tab" data-view="issued" role="tab" aria-controls="issued-view" aria-selected="false">Issued tokens <span id="issued-count"></span></button>
-        </div>
-      </div>
-
-      <div class="filters">
-        <label class="search-field"><span>Search protocols</span><input id="search-input" type="search" placeholder="Search name or slug" autocomplete="off"></label>
-        <label><span>Category</span><select id="category-filter"><option value="">All categories</option></select></label>
-        <label><span>Chain</span><select id="chain-filter"><option value="">All chains</option></select></label>
-        <button class="clear-button" id="clear-filters" type="button">Clear filters</button>
-      </div>
-
-      <div class="table-wrap" id="board-view">
-        <table>
-          <thead>
-            <tr>
-              <th><button class="sort-button" data-sort="rank" type="button">Rank <span aria-hidden="true">↕</span></button></th>
-              <th>Protocol</th><th>Category</th><th>Chains</th>
-              <th><button class="sort-button" data-sort="tvl_usd" type="button">TVL <span aria-hidden="true">↕</span></button></th>
-              <th><button class="sort-button" data-sort="change_7d" type="button">7d change <span aria-hidden="true">↕</span></button></th>
-              <th><button class="sort-button" data-sort="implied_value_usd" type="button">Implied value <span aria-hidden="true">↕</span></button></th>
-            </tr>
-          </thead>
-          <tbody id="board-body"></tbody>
-        </table>
-      </div>
-
-      <div class="table-wrap hidden" id="issued-view">
-        <table>
-          <thead>
-            <tr><th>Protocol</th><th>Category</th><th>Token</th><th><button class="sort-button" data-sort="mcap_usd" type="button">Market cap <span aria-hidden="true">↕</span></button></th></tr>
-          </thead>
-          <tbody id="issued-body"></tbody>
-        </table>
-      </div>
-      <div class="empty-state hidden" id="empty-state">No protocols match the current filters. Try clearing your filters.</div>
+    <section class="integrity-shell" aria-label="Live integrity checks"><div class="integrity-title"><span id="integrity-status">CHECKING</span><b>Integrity</b><small>Computed from this board</small></div><div id="integrity-strip" class="integrity-strip" aria-live="polite"></div></section>
+    <section class="metric-strip" id="metric-strip" aria-label="Model evidence"></section>
+    <section class="workspace" id="board">
+      <div class="section-head"><div><p class="eyebrow">01 / The opportunity set</p><h2 id="view-title">Pre-token ranking board</h2></div><div class="tabs" role="tablist" aria-label="Protocol views"><button class="tab active" id="board-tab" data-view="board" role="tab" aria-controls="board-view" aria-selected="true">Ranking board <span id="board-count"></span></button><button class="tab" id="issued-tab" data-view="issued" role="tab" aria-controls="issued-view" aria-selected="false">Issued tokens <span id="issued-count"></span></button></div></div>
+      <p class="section-note">Ranked by implied market cap, conditional on a token existing. P10–P90 is a predictive residual band; bootstrap bands measure fit and rank stability. Click a protocol to see every calculation.</p>
+      <div class="filters"><label class="search-field"><span>Search protocols</span><input id="search-input" type="search" placeholder="Search name or slug" autocomplete="off"></label><label><span>Category</span><select id="category-filter"><option value="">All categories</option></select></label><label><span>Chain</span><select id="chain-filter"><option value="">All chains</option></select></label><label><span>Farm verdict</span><select id="verdict-filter"><option value="">All verdicts</option><option>FARM</option><option>THIN</option><option>SKIP</option></select></label><button class="clear-button" id="clear-filters" type="button">Clear filters</button></div>
+      <div class="table-caption"><span id="result-count"></span><span>USD · <b>assumed payouts, not observed yields</b></span></div>
+      <div class="table-wrap" id="board-view" role="tabpanel" aria-labelledby="board-tab"><table class="board-table"><thead><tr>
+        <th><button class="sort-button" data-sort="rank" type="button">Rank <span>↕</span></button><small>Bootstrap P10–P90</small></th><th>Protocol <small>Category · chain</small></th><th><button class="sort-button" data-sort="tvl_usd" type="button">TVL <span>↕</span></button><small>Sealed snapshot</small></th><th><button class="sort-button" data-sort="change_7d" type="button">7d <span>↕</span></button></th><th><button class="sort-button" data-sort="implied_value_usd" type="button">Implied value <span>↕</span></button><small>Predictive P10–P90</small></th><th><button class="sort-button" data-sort="token_probability" type="button">Token probability <span>↕</span></button><small>Empirical prevalence</small></th><th><button class="sort-button" data-sort="farm.net_per_hour" type="button">Net $ / hour <span>↕</span></button><small>Point · P10</small></th><th><button class="sort-button" data-sort="farm.break_even_share" type="button">Break-even <span>↕</span></button><small>Farmer share of value</small></th><th>Decision <small>Uses P10 net value</small></th>
+      </tr></thead><tbody id="board-body"></tbody></table></div>
+      <div class="table-wrap hidden" id="issued-view" role="tabpanel" aria-labelledby="issued-tab"><table><thead><tr><th>Protocol</th><th>Category</th><th>Token</th><th><button class="sort-button" data-sort="tvl_usd" type="button">TVL <span>↕</span></button></th><th><button class="sort-button" data-sort="mcap_usd" type="button">Market cap <span>↕</span></button></th></tr></thead><tbody id="issued-body"></tbody></table></div>
+      <div class="empty-state hidden" id="empty-state">No protocols match. Clear the filters to see the full universe.</div><p class="table-footnote" id="board-footnote"></p>
     </section>
-
-    <div class="detail-overlay hidden" id="detail-panel" role="dialog" aria-modal="true" aria-labelledby="detail-title" aria-describedby="detail-subtitle" tabindex="-1">
-      <section class="detail-panel">
-        <div class="detail-head">
-          <div><p class="eyebrow">Protocol details</p><h2 id="detail-title"></h2><p id="detail-subtitle"></p></div>
-          <button class="close-button" id="close-detail" type="button" title="Close details" aria-label="Close details">×</button>
-        </div>
-        <div class="detail-grid">
-          <div class="field-list" id="detail-fields"></div>
-          <div class="farm-panel"><div class="farm-head"><span class="eyebrow">Farming plan</span><span class="step-count">6 steps</span></div><ol id="farm-steps"></ol></div>
-        </div>
-      </section>
-    </div>
+    <section class="evidence-section" id="validation">
+      <div class="section-head"><div><p class="eyebrow">02 / Falsifiable evidence</p><h2>Every term faces the same blind tests.</h2></div><span class="section-index">Lower error wins.</span></div><p class="section-note" id="validation-method"></p>
+      <div class="two-column"><article class="panel"><div class="panel-head"><h3>Choose the curve</h3><span>Same held-out samples</span></div><div id="forms-table" class="small-table-wrap"></div><p class="panel-note" id="form-note"></p></article><article class="panel"><div class="panel-head"><h3>Honest uncertainty</h3><span>Two different questions</span></div><div id="interval-summary"></div></article></div>
+      <article class="panel ablation-panel"><div class="panel-head"><h3>Five v1 multipliers, no free passes</h3><span>LOO + walk-forward ablation</span></div><p class="panel-note" id="ablation-note"></p><div id="ablation-table" class="small-table-wrap"></div></article>
+      <div class="two-column"><article class="panel"><div class="panel-head"><h3>Where the model misses</h3><span>Held-out category errors</span></div><div id="category-errors" class="small-table-wrap"></div></article><article class="panel"><div class="panel-head"><h3>Selection gets its own test</h3><span>Outer holdouts</span></div><div id="outer-validation"></div></article></div>
+      <article class="panel odds-panel"><div class="panel-head"><h3>Token probability comes from records.</h3><span id="odds-cohort"></span></div><p class="section-note" id="odds-method"></p><div id="odds-validation" class="small-table-wrap"></div><p class="caveat" id="odds-caveat"></p><details><summary>Inspect every empirical probability cell</summary><div id="odds-buckets" class="small-table-wrap bounded"></div></details></article>
+    </section>
+    <section class="planner-section" id="planner">
+      <div class="section-head"><div><p class="eyebrow">03 / Put the economics to work</p><h2>Build a farm plan you can afford.</h2></div><span class="section-index">P10 discipline. Real constraints.</span></div><p class="section-note">An exact subset search maximizes total expected airdrop value within capital + gas and weekly time budgets. Current-scenario P10 SKIP rows are excluded. Selected positions are displayed by expected value per dollar reserved.</p>
+      <div class="planner-layout"><div class="planner-controls"><label><span>Capital + gas budget</span><div class="input-unit"><b>$</b><input id="budget-input" type="number" min="0" step="1" inputmode="decimal"></div></label><label><span>Hours available / week</span><div class="input-unit"><input id="hours-input" type="number" min="0" step="0.25" inputmode="decimal"><b>h</b></div></label><div class="sensitivity"><p class="eyebrow">Assumption sensitivity</p><label><span>Farmer allocation scenario <output id="allocation-output"></output></span><input id="allocation-input" type="range" min="0" max="2" value="1" step="0.1"></label><label><span>Your time value <output id="time-output"></output></span><input id="time-input" type="range" min="0" step="1"></label><p>Changes here affect the planner preview. The sealed ranking and its base economics stay visible above.</p></div></div><div class="planner-results"><div id="planner-metrics" class="planner-metrics" aria-live="polite"></div><div id="planner-table" class="small-table-wrap bounded"></div><p class="panel-note" id="planner-note"></p></div></div>
+      <article class="assumptions-box"><div class="panel-head"><h3>Every dollar has an assumption.</h3><span>Scenario inputs, explicitly labeled</span></div><p id="farm-formula" class="equation"></p><div id="farm-assumptions" class="assumption-grid"></div><p class="caveat" id="farm-caveat"></p></article>
+    </section>
+    <section class="audit-section" id="audit"><div class="section-head"><div><p class="eyebrow">04 / No disappearing protocols</p><h2>The entire snapshot, accounted for.</h2></div><span class="section-index" id="audit-total"></span></div><div class="audit-equation" id="audit-equation"></div><p class="section-note" id="audit-method"></p><details><summary id="audit-summary">Inspect every excluded pre-token protocol</summary><div id="audit-table" class="small-table-wrap bounded"></div></details><div class="hash-note"><span>Sealed snapshot SHA-256</span><code id="snapshot-hash"></code></div></section>
   </main>
-  <footer><span>Token Radar · Snapshot <span id="footer-date"></span></span><span id="footer-source"></span></footer>
-  <script src="../data.js?v=20261124en2"></script>
-  <script src="app.js?v=20261124en2"></script>
+  <div class="detail-overlay hidden" id="detail-panel" role="dialog" aria-modal="true" aria-labelledby="detail-title" aria-describedby="detail-subtitle" tabindex="-1" aria-hidden="true"><section class="detail-panel"><div class="detail-head"><div><p class="eyebrow">Protocol dossier</p><h2 id="detail-title"></h2><p id="detail-subtitle"></p></div><button class="close-button" id="close-detail" type="button" aria-label="Close details">×</button></div><div class="detail-grid" tabindex="0" role="region" aria-label="Protocol details and farming plan"><div><div id="detail-summary" class="detail-summary"></div><div class="field-list" id="detail-fields"></div><div id="detail-odds" class="detail-explainer"></div><div id="detail-economics" class="detail-explainer"></div></div><div class="farm-panel"><div class="farm-head"><h3>Farming plan</h3><span class="step-count"></span></div><ol id="farm-steps"></ol></div></div></section></div>
+  <footer><span>Token Radar / v2 · Snapshot <span id="footer-date"></span></span><span id="footer-source"></span><span>Fitted evidence. Explicit assumptions.</span></footer>
+  <script src="../data.js?v=20261125v2"></script><script src="planner.js?v=20261125v2"></script><script src="app.js?v=20261125v2"></script>
 </body>
 </html>
